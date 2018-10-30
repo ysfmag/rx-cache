@@ -56,5 +56,9 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "rxjs": "^6.3.3"
+  }
 }
