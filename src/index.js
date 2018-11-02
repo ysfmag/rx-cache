@@ -17,12 +17,16 @@ const store = {};
 
 const notification = {};
 
-const getId = (obsId, params) => {
-  return generateID({ obsId, params });
+const getId = (obsId, params, forceFetch) => {
+  let idParams = { obsId, params };
+  if (forceFetch) {
+    idParams = { ...idParams, timestamp: Date.now() };
+  }
+  return generateID(idParams);
 };
 
-const dispatch = ({ resourceName: obsId, stream: obs, params }) => {
-  const id = getId(obsId, params);
+const dispatch = ({ resourceName: obsId, stream: obs, params }, forceFetch) => {
+  const id = getId(obsId, params, forceFetch);
   if (!store[id]) {
     store[id] = { stream: obs, called: false };
     notification[id] = new BehaviorSubject({
